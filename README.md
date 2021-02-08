@@ -3,7 +3,7 @@
 | Column         | Type       | Options                       |
 | ---------------| -----------| ------------------------------|
 | nickname       | string     | null: false                   |
-| email          | string     | null: false                   |
+| email          | string     | null: false,unique true       |
 | password       | string     | null: false                   |
 | firstname      | string     | null: false                   |
 | lastname       | string     | null: false                   |
@@ -38,16 +38,13 @@
 - has_one :order
 - belongs_to :user
 
-## order テーブル
+## orders テーブル
 
 | Column       | Type          | Options                       |
 | ------------ | --------------| ----------------------------- |
-| card_num     | integer       | null: false                   |
-| term_month   | integer       | null: false                   |
-| term_year    | integer       | null: false                   |
-| cvc          | integer       | null: false                   |
 | address      | references    | null: false,foreign_key: true |
 | user         | references    | null: false,foreign_key: true |
+
 
 ### Association
 
@@ -55,7 +52,7 @@
 - belongs_to :item
 - has_one :address
 
-## address テーブル
+## addresses テーブル
 
 | Column     | Type   | Options     |
 | -----------| -------| ------------|
