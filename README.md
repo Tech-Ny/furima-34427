@@ -61,7 +61,7 @@
 | address    | integer    | null: false | 
 | building   | string     |             |
 | phone_num  | string     | null: false |
-| orders     | references | null: false | 
+| order      | references | null: false | 
 
 ### Association
 
