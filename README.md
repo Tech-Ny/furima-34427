@@ -9,7 +9,7 @@
 | lastname          | string                 | null: false                          |
 | firstnamedetail   | string                 | null: false                          |
 | lastnamedetail    | string                 | null: false                          |
-| birthday          | integer                | null: false                          |
+| birthday          | date                   | null: false                          |
 
 
 ### Association
@@ -65,6 +65,6 @@
 
 ### Association
 
-- belongs_to :order
+- belongs_to :orders
 
 
