@@ -8,15 +8,16 @@ class Item < ApplicationRecord
   belongs_to :delivar_at
 
   with_options presence: true do
-  validates :name          
-  validates :describe      
-  validates :price 
-  validates :category_id,     numericality: { other_than: 1 } 
-  validates :status_id,       numericality: { other_than: 1 }      
-  validates :bearer_id,       numericality: { other_than: 1 }      
-  validates :region_id,       numericality: { other_than: 1 }      
-  validates :delivar_at_id,   numericality: { other_than: 1 }  
-  validates :user          
+    validates :image
+    validates :name          
+    validates :describe      
+    validates :price 
+    validates :category_id,     numericality: { other_than: 1 } 
+    validates :status_id,       numericality: { other_than: 1 }      
+    validates :bearer_id,       numericality: { other_than: 1 }      
+    validates :region_id,       numericality: { other_than: 1 }      
+    validates :delivar_at_id,   numericality: { other_than: 1 }  
+    validates :user          
   end
 
   has_one_attached :image
