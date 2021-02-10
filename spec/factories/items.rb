@@ -5,11 +5,11 @@ FactoryBot.define do
     name{'product'}
     describe{Faker::Lorem.sentence}
     price{1000}
-    category_id{'2'}
-    status_id{'2'}
-    bearer_id{'2'}
-    region_id{'3'}
-    delivar_at_id{'3'}
+    category_id{2}
+    status_id{2}
+    bearer_id{2}
+    region_id{3}
+    delivar_at_id{3}
     association :user
 
     after(:build) do |item|
