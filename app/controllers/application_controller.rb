@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth
-  # before_action :authenticate_user! ログイン画面への遷移:商品出品の際に使用しそうなので先に記述しておきます。
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
