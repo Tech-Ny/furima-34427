@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new,:create]
 
   def index
+    @items = Item.All
   end
 
   def new
@@ -16,6 +17,10 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    
   end
 
   private
