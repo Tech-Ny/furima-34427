@@ -37,11 +37,24 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price is out of setting range or invalid")
     end
 
-    it '金額が半角数字意外では登録できない' do
+    it '金額が半角英語では登録できない' do
       @item.price = 'aaaaaaaa'
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is out of setting range or invalid")
     end
+
+    it '金額が全角文字では登録できない' do
+      @item.price = '１００００'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is out of setting range or invalid")
+    end
+
+    it '金額が半英数混合では登録できない' do
+      @item.price = '1111aaaa'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is out of setting range or invalid")
+    end
+
 
     it 'カテゴリーのIDが1では登録できない' do
       @item.category_id = 1
@@ -70,7 +83,7 @@ RSpec.describe Item, type: :model do
     it 'userがいない場合は登録できない' do
       @item.user = nil
       @item.valid?
-      expect(@item.errors.full_messages).to include("User can't be blank", "User must exist")
+      expect(@item.errors.full_messages).to include("User must exist")
     end
 
   end
