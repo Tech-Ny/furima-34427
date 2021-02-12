@@ -2,37 +2,65 @@ require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
   before do
-    @addresses = FactoryBot.build(:item)
+    @order_address = FactoryBot.build(:order_address)
   end
 
   describe '購入情報入力' do
     
-    it 'すべての値が正しく入力されていれば保存できること' do
-      expect(@addresses).to be_valid
+    it 'post_numが空だと保存できない' do
+      @order_address.post_num = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Post num can't be blank", "Post num is invalid. Include hyphen(-)")
+    end
+    it 'post_numが半角のハイフンを含んだ正しい形式でないと保存できない' do
+      @order_address.post_num = '1234567'
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Post num is invalid. Include hyphen(-)")
     end
 
-    it 'post_numが空だと保存できないこと' do
+    it '発送元のidが1の場合保存できない' do
+      @order_address.region_id = 1
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include('Region must be other than 1')
+    end
+
+    it 'cwtvが空だと保存できない' do
+      @order_address.cwtv = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Cwtv can't be blank")
+    end
+
+    it 'addressesが空だと保存できない' do
+      @order_address.addresses = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Addresses can't be blank")
+    end
+    it 'buildingは空でも保存できる' do
+      @order_address.building = ''
+      @order_address.valid?
+      #expect(@order_address.errors.full_messages).to include("addresses can't be blank")
+    end
+
+    it 'phone_numが空だと保存できない' do
+      @order_address.phone_num = ''
+      @order_address.valid?
+      expect(@order_address.errors.full_messages).to include("Phone num can't be blank", "Phone num is invalid")
 
     end
-    it 'post_numが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-      
-    end
-    it 'prefectureを選択していないと保存できないこと' do
-    end
-    it 'cityは空でも保存できること' do
-    end
-    it 'house_numberは空でも保存できること' do
-    end
-    it 'building_nameは空でも保存できること' do
-    end
-    it 'priceが空だと保存できないこと' do
-    end
-    it 'priceが全角数字だと保存できないこと' do
-    end
-    it 'priceが1円未満では保存できないこと' do
-    end
-    it 'priceが1,000,000円を超過すると保存できないこと' do
-    end
+
+    #it 'userがいない場合は保存できない' do
+    #  @order_address.user_id = nil
+    #  @order_address.valid?
+    #  expect(@order_addresses.errors.full_messages).to include('User must exist')
+    #end
+
+    #it 'itemがない場合は保存できない' do
+    #  @order_address.item_id = nil
+    #  @order_address.valid?
+    #  expect(@order_addresses.errors.full_messages).to include('User must exist')
+    #end
+
+
   
   end
 
