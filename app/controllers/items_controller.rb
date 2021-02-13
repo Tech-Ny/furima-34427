@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show,]
   before_action :item_set, only: [:show, :update, :edit, :destroy]
+  before_action :order_checker, only: [:index, :show]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -21,10 +22,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    
   end
 
   def edit
     redirect_to action: :index unless user_signed_in? && @item.user.id == current_user.id
+    if @item.order.present? 
+      redirect_to action: :index
+    end
   end
 
   def update
@@ -43,6 +48,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def order_checker
+    @orders = Order.all
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :describe, :price, :category_id, :status_id, :bearer_id, :region_id,

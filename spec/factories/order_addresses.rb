@@ -6,6 +6,8 @@ FactoryBot.define do
     addresses{'中弛1-5-3'}
     building{'鳳凰ビルディング3階'}
     phone_num{'09055334422'}
+    token {"tok_abcdefghijk00000000000000000"}
+
     #association :user
     #association :item
   end
