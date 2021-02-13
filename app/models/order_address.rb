@@ -10,6 +10,8 @@ class OrderAddress
     validates :region_id, numericality: { other_than: 1 }
     validates :phone_num, format: {with: /\A\d{11}\z/}
     validates :token
+    validates :user_id
+    validates :item_id
   end
   
   def save

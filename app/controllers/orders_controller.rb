@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only:[:index, :show, :new, :create]
+  before_action :authenticate_user!, only:[:index, :show, :create]
+  before_action :item_check, only:[:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
 
     if user_signed_in? && @item.user.id == current_user.id
@@ -13,12 +13,9 @@ class OrdersController < ApplicationController
 
   end
 
-  def new
-  end
-
   def create
-    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new(order_params)
+    binding.pry
     if @order_address.valid?
       pay_item
       @order_address.save
@@ -34,7 +31,11 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order_address).permit(:post_num,:region_id,:cwtv,:addresses,:building,:phone_num).merge(user_id: current_user.id,item_id: @item.id,token: params[:token])
   end
-  
+
+  def item_check
+    @item = Item.find(params[:item_id])
+  end
+
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
      Payjp::Charge.create(
