@@ -12,7 +12,7 @@ class Item < ApplicationRecord
     validates :describe
     validates :price,
               numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
-                              message: 'が不正です ¥300~¥9,999,999で設定してください。' }
+                              message: 'が不正です 半角数字かつ¥300~¥9,999,999の間で設定してください。' }
   end
 
   with_options presence: true, numericality: { other_than: 1 ,message:'は「---」以外を設定してください'} do
