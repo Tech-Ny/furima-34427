@@ -4,7 +4,8 @@ class OrderAddress
   attr_accessor :user_id, :item_id, :post_num, :cwtv, :addresses, :building, :region_id, :phone_num,:token
 
   with_options presence: true do
-    validates :post_num,  format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    #validates :post_num,  format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :post_num,  format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "が不正です ハイフン(-)を入れてください"}
     validates :cwtv
     validates :addresses
     validates :region_id, numericality: { other_than: 1 }
