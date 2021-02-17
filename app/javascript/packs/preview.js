@@ -1,11 +1,11 @@
 if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
   document.addEventListener('DOMContentLoaded', function(){
-    const ImageList = document.getElementById('image-list');
+    const ImageList = document.getElementById('image-list');    
 
     const createImageHTML = (blob) => {
       const imageElement = document.createElement('div');
-
       const blobImage = document.createElement('img');
+      blobImage.className="preview"; 
       blobImage.setAttribute('src', blob);
 
       imageElement.appendChild(blobImage);
@@ -22,6 +22,7 @@ if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
       const blob = window.URL.createObjectURL(file);
 
       createImageHTML(blob);
+
     });
   });
 }
