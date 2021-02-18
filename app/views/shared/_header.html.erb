@@ -11,6 +11,9 @@
   </div>
   <div class='nav'>
     <ul class='lists-left'>
+    <%if user_signed_in?%> 
+      <li><%= link_to 'マイページ', user_path(current_user), class: "category-list" %></li>
+    <% end %>
       <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
