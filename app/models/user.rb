@@ -23,4 +23,7 @@ class User < ApplicationRecord
   validates_format_of :password, with: PASSWORD_REGEX, message: 'は英数字両方を入力してください'
   has_many :items
   has_many :orders
+
+  has_one :card, dependent: :destroy
+
 end

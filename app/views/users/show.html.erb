@@ -6,6 +6,7 @@
 </div>
 <%if current_user.id == @user.id%>
 <%= form_with model:@user, url:user_path, method: :put,local: true do |f| %>
+
 <div class='form-wrap'>
   <%= render 'shared/error_messages', model: f.object %>
   
@@ -91,22 +92,38 @@
                   "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
       <span>※アカウントの譲渡、偽情報の提示は刑罰に課せられる場合があるのでご遠慮ください。また、安全のために一度ログアウト状態にします。</span>
     </div>
-  </div>
-    
-  <div class="form-group">
-    <h2 class='form-bottom-text'>
-    </h2>
-  </div>
+  </div> 
+   <div class="form-group">
+   <h2 class='form-bottom-text'>
+   </h2>
+   </div>
   <div class='register-btn'>
     <%= f.submit "情報編集" ,class:"register-red-btn" %>
   </div>
-
+  <div class='form-header'>
+    <h2 class='form-header-text'>
+      <%= link_to "カード登録はこちらから",new_card_path %>
+    </h2>
+  </div>
   <% end %>
-
-  <%#p class='register-info'>本人情報の登録について</p%>
-
+  <%if current_user.card.present?%>
+  <div class="form-group">
+       <div class='form-text-wrap'>
+    <h2>現在登録中のカード情報</h2>
+    【カード番号】
+    <br>
+    <%= "**** **** **** " + @card[:last4] %>
+    <br>
+    【有効期限】
+    <br>
+    <%= @card[:exp_month] %>/<%= @card[:exp_year] %>
+       </div>
+   </div>
+   <%end%>
 </div>
+
 <% end %>
+
   <div class='form-header'>
     <h1 class='form-header-text'>
       過去の商品
