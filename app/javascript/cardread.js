@@ -1,7 +1,7 @@
 const pay = () => {
   Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   const form = document.getElementById("charge-form-save");
-  if(form != null){
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
  
@@ -31,6 +31,5 @@ const pay = () => {
       }
     });
   });
-  };
  };
  window.addEventListener("load", pay);

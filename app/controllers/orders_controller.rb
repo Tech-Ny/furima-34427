@@ -14,23 +14,30 @@ class OrdersController < ApplicationController
 
   def create
     @order_address = OrderAddress.new(order_params)
-    if current_user.card.present?
-      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      customer_token = current_user.card.customer_token
-      Payjp::Charge.create(
-      amount: @item.price,
-      customer: customer_token,
-      currency: 'jpy' 
-      )
+    if @order_address.valid?
+      pay_item
+      @order_address.save
+      redirect_to root_path
     else
-      if @order_address.valid?
-        pay_item
-        @order_address.save
-        redirect_to root_path
-      else
-       render :index
-      end
+      render :index
     end
+    #@order_address = OrderAddress.new(order_params)
+    #if current_user.card.present? && @order_address.valid?
+    #  Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    #  customer_token = current_user.card.customer_token
+    #  Payjp::Charge.create(
+    #  amount: @item.price,
+    #  customer: customer_token,
+    #  currency: 'jpy' 
+    #  )
+    #  redirect_to root_path
+    #elsif 
+    #  pay_item
+    #  @order_address.save
+    #  redirect_to root_path
+    #else
+    #  render :index
+    #end
   end
 
   private
